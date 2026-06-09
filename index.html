@@ -1,22 +1,30 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document title</title>
-    <script src="script.js" defer></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>herbhelp</title>
+    <script src="js/main.js" defer></script>
 </head>
 
 <body>
     <header>
         <nav>
-            <a href="index.html">LOGO</a>
+            <a href="index.html">HH-LOGO</a>
 
             <ul>
-                <li><a href="herbs.html">Gyógynövények</a></li>
-                <li><a href="symptoms.html">Tünetek</a></li>
-                <li><a href="articles">Tudástár</a></li>
+                <li>
+                    <a href="herbs.html">Gyógynövények</a>
+                </li>
+
+                <li>
+                    <a href="symptoms.html">Tünetek</a>
+                </li>
+
+                <li>
+                    <a href="articles">Tudástár</a>
+                </li>
             </ul>
         </nav>
     </header>
@@ -26,13 +34,55 @@
             <h1>Természetes segítség a mindennapokra</h1>
 
             <p>
-                Keress tünetre vagy gyógynövényre,
-                és találd meg a megfelelő természetes megoldást!
+                Keress tünetre vagy gyógynövényre, és találd meg a megfelelő
+                természetes megoldást!
             </p>
+        </section>
+
+        <section id="search">
+            <h2>Keresée</h2>
+
+            <form>
+                <input type="text" placeholder="Pl: köhögés, kamilla...">
+                <button type="submit">Keresés</button>
+            </form>
+        </section>
+
+        <section id="popular-symptoms">
+            <h2>Gyakori tünetek</h2>
+
+            <div>
+                <button>Köhögés</button>
+                <button>Torokfájás</button>
+                <button>Stressz</button>
+                <button>Álmatlanság</button>
+            </div>
+        </section>
+
+        <section id="featured-plants">
+            <h2>Kiemelt gyógynövények</h2>
+
+            <article>
+                <h3>Kamilla</h3>
+                <p>Gyulladáscsökkentő és nyugtató hatású.</p>
+            </article>
+
+            <article>
+                <h3>Citromfű</h3>
+                <p>Segíthet a stressz és az alvászavar enyhítésében.</p>
+            </article>
+
+            <article>
+                <h3>Kakukkfű</h3>
+                <p>Légúti panaszok és köhögés esetén használjuk.</p>
+            </article>
+
         </section>
     </main>
 
-    <footer></footer>
+    <footer>
+        <p>&copy; 2026 HerbHelp</p>
+    </footer>
 </body>
 
 </html>
