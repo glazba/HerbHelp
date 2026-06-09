@@ -31,6 +31,7 @@
     </header>
 
     <main>
+        <!--! Hero -->
         <section id="hero">
             <h1>Természetes segítség a mindennapokra</h1>
 
@@ -40,19 +41,21 @@
             </p>
         </section>
 
+        <!--! Search -->
         <section id="search">
             <h2>Keresée</h2>
 
-            <form>
-                <input type="text" placeholder="Pl: köhögés, kamilla...">
+            <form id="search-form">
+                <input id="search-input" type="text" placeholder="Pl: köhögés, kamilla...">
                 <button type="submit">Keresés</button>
             </form>
         </section>
 
+        <!--! Popular symptoms -->
         <section id="popular-symptoms">
             <h2>Gyakori tünetek</h2>
 
-            <div>
+            <div class="symptom-container">
                 <button>Köhögés</button>
                 <button>Torokfájás</button>
                 <button>Stressz</button>
@@ -60,24 +63,41 @@
             </div>
         </section>
 
-        <section id="featured-plants">
+        <!--! Featured herbs -->
+        <section id="featured-herbs">
             <h2>Kiemelt gyógynövények</h2>
 
-            <article>
-                <h3>Kamilla</h3>
-                <p>Gyulladáscsökkentő és nyugtató hatású.</p>
-            </article>
+            <div class="herb-container">
+                <article class="herb-card">
+                    <img src="" alt="Kamilla">
 
-            <article>
-                <h3>Citromfű</h3>
-                <p>Segíthet a stressz és az alvászavar enyhítésében.</p>
-            </article>
+                    <div class="herb-content">
+                        <h3>Kamilla</h3>
+                        <p>Gyulladáscsökkentő és nyugtató hatású.</p>
+                    </div>
 
-            <article>
-                <h3>Kakukkfű</h3>
-                <p>Légúti panaszok és köhögés esetén használjuk.</p>
-            </article>
+                </article>
 
+                <article class="herb-card">
+                    <img src="" alt="Citromfű">
+
+                    <div class="herb-content">
+                        <h3>Citromfű</h3>
+                        <p>Segíthet a stressz és az alvászavar enyhítésében.</p>
+                    </div>
+
+                </article>
+
+                <article class="herb-card">
+                    <img src="" alt="Kakukkfű">
+
+                    <div class="herb-content">
+                        <h3>Kakukkfű</h3>
+                        <p>Légúti panaszok és köhögés esetén használjuk.</p>
+                    </div>
+
+                </article>
+            </div>
         </section>
     </main>
 
