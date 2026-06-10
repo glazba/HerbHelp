@@ -32,6 +32,8 @@ searchForm.addEventListener("submit", (event) => {
     }
 });
 
+/* 
+! Transfered to js/data.js
 const herbs = [
     {
         id: 1,
@@ -52,6 +54,6 @@ const herbs = [
         description: "Nyugtató hatású gyógynövény"
     }
 ];
-
+ */
 const resultsContainer = document.querySelector("#results-container");
 resultsContainer.innerHTML = "";
