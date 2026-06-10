@@ -13,7 +13,7 @@ const articleId =
 const article =
     getArticlesById(articleId);
 
-    
+
 //! GUARD
 
 if (!article) {
@@ -38,12 +38,23 @@ const articleContent =
     document.querySelector("#article-content");
 
 
-articleTitle.textContent =
-    article.title;
+//! FUNCTIONS
 
-articleDescription.textContent =
-    article.description;
+function renderArticle() {
+    articleTitle.textContent =
+        article.title;
 
-articleContent.textContent =
-    article.content;
+    articleDescription.textContent =
+        article.description;
 
+    articleContent.textContent =
+        article.content;
+}
+
+function init() {
+    renderArticle();
+}
+
+//! INIT
+
+init();

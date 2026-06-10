@@ -117,5 +117,7 @@ searchForm.addEventListener("submit", (event) => {
     handleSearch(searchTerm);
 });
 
+
 //! INIT
+
 init();
