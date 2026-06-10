@@ -18,7 +18,6 @@ function searchHerbs(searchTerm) {
             .toLowerCase()
             .includes(searchTerm) ||
         herb.symptoms
-            .toLowerCase()
             .includes(searchTerm));
 }
 

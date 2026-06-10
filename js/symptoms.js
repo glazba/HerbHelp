@@ -3,28 +3,54 @@
 const symptomsContainer =
     document.querySelector("#symptoms-container");
 
-    
+
 //! FUNCTIONS
 
-function getAllSymptoms() {
-    const allSymptoms =
-        herbs.flatMap(
-            (herb) => herb.symptoms
+function getSymptomsData() {
+    const symptomsMap = {};
+
+    herbs.forEach((herb) => {
+        herb.symptoms.forEach((symptom) => {
+
+            if (!symptomsMap[symptom]) {
+                symptomsMap[symptom] = {
+                    name: symptom,
+                    herbsToUse: []
+                };
+            }
+
+            symptomsMap[symptom].herbsToUse.push({
+                id: herb.id,
+                name: herb.name
+            });
+        });
+    });
+
+    return Object.values(symptomsMap)
+        .sort((a, b) =>
+            a.name.localeCompare(
+                b.name,
+                "hu"
+            )
         );
-    const uniqueSymptoms =
-        [...new Set(allSymptoms)];
-
-    uniqueSymptoms.sort();
-
-    return uniqueSymptoms;
 }
-console.log(getAllSymptoms());
 
+function createSymptomCard(symptomData) {
+    const herbsList =
+        symptomData.herbsToUse
+            .map((herb) => `
+                <li>
+                    <a href="herb.html?id=${herb.id}">
+                        ${herb.name}
+                    </a>
+                </li>
+            `)
+            .join("");
 
-function createSymptomCard(symptom) {
     return `
-        <article class="symptom-card>
-            <h2>${symptom}</h2>
+        <article class="symptom-card">
+            <h2>${symptomData.name}</h2>
+            <ol>${herbsList}</ol>
         </article>
     `;
 }
@@ -32,7 +58,7 @@ function createSymptomCard(symptom) {
 
 function renderSymptoms() {
     const symptoms =
-        getAllSymptoms();
+        getSymptomsData();
 
     let html = "";
 
