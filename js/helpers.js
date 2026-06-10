@@ -1,14 +1,37 @@
 //* Reusable data processing and search helper functions
 
+//! SEARCH
+
+function normalizeText(text) {
+    return text
+        .trim()
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+}
+
 //! HERBS
 
 function searchHerbs(searchTerm) {
-    return herbs.filter((herb) =>
-        herb.name
-            .toLowerCase()
-            .includes(searchTerm) ||
-        herb.symptoms
-            .includes(searchTerm));
+    const normalizedSearchTerm =
+        normalizeText(searchTerm);
+
+    return herbs.filter((herb) => {
+        const herbName =
+            normalizeText(herb.name);
+
+        const symptoms =
+            herb.symptoms.map((symptom) =>
+                normalizeText(symptom)
+            );
+
+        return herbName.includes(
+            normalizedSearchTerm
+        ) ||
+            symptoms.includes(
+                normalizedSearchTerm
+            );
+    });
 }
 
 function getHerbById(id) {

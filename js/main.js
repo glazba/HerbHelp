@@ -105,9 +105,7 @@ searchForm.addEventListener("submit", (event) => {
 
     /*  resultsContainer.innerHTML = ""; */
     const searchTerm =
-        searchInput.value
-            .trim()
-            .toLowerCase();
+        searchInput.value;
 
     if (!searchTerm) {
         alert("Adj meg egy keresendő növényt, vagy tünetet!");
