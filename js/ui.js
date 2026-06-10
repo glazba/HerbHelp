@@ -1,5 +1,6 @@
 //* Reusable UI component and HTML rendering functions
 
+
 //! HERB CARDS
 
 function createHerbCard(herb) {
@@ -66,4 +67,3 @@ function createArticleCard(article) {
         </article>
     `;
 }
-

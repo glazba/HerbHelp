@@ -1,8 +1,21 @@
 //* Articles page logic and article list rendering
 
+
 //! DOM
+
 const articlesContainer =
     document.querySelector("#articles-container");
+
+//! ERROR
+
+if (!articlesContainer) {
+    throw new Error(
+        "#articles-container not found."
+    );
+}
+
+
+//! RENDER
 
 function renderArticles() {
     let html = "";
@@ -16,9 +29,11 @@ function renderArticles() {
         html;
 }
 
+
+//! INIT
+
 function init() {
     renderArticles();
 }
 
-//! INIT
 init();

@@ -1,7 +1,7 @@
 //* Reusable data processing and search helper functions
 
 
-//! SEARCH
+//! SEARCH HELPER
 
 function normalizeText(text) {
     return text

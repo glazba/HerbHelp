@@ -1,17 +1,18 @@
 //* Single herb page logic and herb details rendering
 
+
+//! DATA
+
 const params =
     new URLSearchParams(window.location.search);
 
 const herbId =
     Number(params.get("id"));
 
-// console.log(herbId);
-
 const herb =
     herbService.getHerbById(herbId);
 
-//! Error
+//! ERROR
 if (!herb) {
     document.body.innerHTML = `
         <h1>Növény nem található.</h1>
@@ -19,6 +20,9 @@ if (!herb) {
 
     throw new Error("Herb not found");
 }
+
+
+//! DOM
 
 const herbName =
     document.querySelector("#herb-name");
@@ -39,7 +43,7 @@ const herbImage =
     document.querySelector("#herb-image");
 
 
-//! FUNCTIONS
+//! RENDER
 
 function renderHerb() {
     herbName.textContent =
@@ -70,8 +74,11 @@ function renderSymptoms() {
         `;
     });
 
-    herbSymptoms.innerHtml = html;
+    herbSymptoms.innerHTML = html;
 }
+
+
+//! INIT
 
 function init() {
     renderHerb();
@@ -79,7 +86,4 @@ function init() {
     renderSymptoms();
 }
 
-//! INIT
-
 init();
-

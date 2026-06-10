@@ -1,5 +1,8 @@
 //* Single article page logic and article details rendering
 
+
+//! DATA
+
 const params =
     new URLSearchParams(
         window.location.search
@@ -13,8 +16,7 @@ const articleId =
 const article =
     articleService.getArticleById(articleId);
 
-
-//! GUARD
+//! ERROR
 
 if (!article) {
     document.body.innerHTML = `
@@ -38,7 +40,7 @@ const articleContent =
     document.querySelector("#article-content");
 
 
-//! FUNCTIONS
+//! RENDER
 
 function renderArticle() {
     articleTitle.textContent =
@@ -51,10 +53,11 @@ function renderArticle() {
         article.content;
 }
 
+
+//! INIT
+
 function init() {
     renderArticle();
 }
-
-//! INIT
 
 init();

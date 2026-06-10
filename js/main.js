@@ -18,7 +18,7 @@ const popularSymptomsContainer =
     document.querySelector("#popular-symptoms-container");
 
 
-//! FUNCTIONS
+//! RENDER
 
 function renderResults(results) {
     let html = "";
@@ -61,6 +61,9 @@ function renderPopularSymptoms() {
         html;
 }
 
+
+//! SEARCH
+
 function handleSearch(searchTerm) {
     const results =
         herbService.searchHerbs(
@@ -96,28 +99,34 @@ function setupPopularSymptomsEvents() {
     });
 }
 
+
+//! EVENTS
+
+function setupSearchEvents() {
+    searchForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        /*  resultsContainer.innerHTML = ""; */
+        const searchTerm =
+            searchInput.value;
+
+        if (!searchTerm) {
+            alert("Adj meg egy keresendő növényt, vagy tünetet!");
+            return;
+        }
+
+        handleSearch(searchTerm);
+    });
+}
+
+
+//! INIT
+
 function init() {
     renderFeaturedHerbs();
     renderPopularSymptoms();
     setupPopularSymptomsEvents();
+    setupSearchEvents();
 }
-
-searchForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    /*  resultsContainer.innerHTML = ""; */
-    const searchTerm =
-        searchInput.value;
-
-    if (!searchTerm) {
-        alert("Adj meg egy keresendő növényt, vagy tünetet!");
-        return;
-    }
-
-    handleSearch(searchTerm);
-});
-
-
-//! INIT
 
 init();

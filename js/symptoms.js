@@ -1,11 +1,19 @@
 //* Symptoms page logic and related herbs rendering
+
+
 //! DOM
 
 const symptomsContainer =
     document.querySelector("#symptoms-container");
 
+//! ERROR
 
-//! FUNCTIONS
+if (!symptomsContainer) {
+    throw new Error("#symptoms-container not found");
+}
+
+
+//! RENDER
 
 function renderSymptoms() {
     const symptoms =
@@ -23,11 +31,10 @@ function renderSymptoms() {
 }
 
 
+//! INIT
+
 function init() {
     renderSymptoms();
 }
-
-
-//! INIT
 
 init();

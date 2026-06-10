@@ -2,6 +2,8 @@
 
 class SymptomService {
 
+    //! GETTERS
+    
     getAllSymptoms() {
         return [...new Set(
             herbs.flatMap(

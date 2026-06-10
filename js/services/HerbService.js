@@ -1,12 +1,15 @@
 //* Herb related logic and data operations
 
 class HerbService {
+
+    //! SEARCH
     searchHerbs(searchTerm) {
 
         const normalizedSearchTerm =
             normalizeText(searchTerm);
 
         return herbs.filter((herb) => {
+            
             const herbName =
                 normalizeText(herb.name);
 
@@ -19,6 +22,7 @@ class HerbService {
         });
     }
 
+    //! GETTERS
     getHerbById(id) {
         return herbs.find((herb) =>
             herb.id === id);
