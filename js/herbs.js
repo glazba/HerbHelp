@@ -10,6 +10,7 @@ if (!herbsContainer) {
 }
 
 //! FUNCTIONS
+/* 
 function createHerbCard(herb) {
     return `
         <article class="herb-card">    
@@ -24,6 +25,7 @@ function createHerbCard(herb) {
         </article>
     `;
 }
+*/
 
 function renderHerbs() {
     let html = "";

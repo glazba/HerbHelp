@@ -26,7 +26,7 @@ function searchHerbs(searchTerm) {
         herb.symptoms
             .includes(searchTerm));
 }
-
+/* 
 function createResultCard(herb) {
     return `
         <article class="herb-card">
@@ -40,17 +40,17 @@ function createResultCard(herb) {
                     <h3>${herb.name}</h3>
                     <p>${herb.description}</p>
                 </div>
-                
+
             </a>
         </article>    
     `;
 }
-
+ */
 function renderResults(results) {
     let html = "";
 
     results.forEach((herb) => {
-        html += createResultCard(herb);
+        html += createHerbCard(herb);
     });
 
     resultsContainer.innerHTML = html;
@@ -71,7 +71,7 @@ function handleSearch(searchTerm) {
     renderResults(results);
 }
 
-
+/* 
 function createFeaturedHerbCard(herb) {
     return `
         <article class="herb-card">
@@ -90,13 +90,14 @@ function createFeaturedHerbCard(herb) {
         </article>
     `;
 }
+ */
 
 function renderFeaturedHerbs() {
     let html = "";
 
     herbs.forEach((herb) => {
         html +=
-            createFeaturedHerbCard(herb);
+            createHerbCard(herb);
     });
 
     featuredHerbsContainer.innerHTML =
