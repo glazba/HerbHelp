@@ -1,22 +1,37 @@
+//! DOM
 const herbsContainer =
     document.querySelector("#herbs-container");
 
-function renderHerbs() {
-    herbs.forEach((herb) => {
-        herbsContainer.innerHTML += `
-    
-            <article class="herb-card">
+//! FUNCTIONS
+function createHerbCard(herb) {
+    return `
+        <article class="herb-card">    
+            <h2>${herb.name}</h2>
+            
+            <p>${herb.description}</p>
+            
+            <a href="herb.html?id=${herb.id}">
+                Megnyitás
+            </a>
 
-                <h2>${herb.name}</h2>
-
-                <p>${herb.description}</p>
-
-                <a href="herb.html?id=${herb.id}">
-                    Megnyitás
-                </a>
-            </article>
-        `;
-    });
+        </article>
+    `;
 }
 
-renderHerbs();
+function renderHerbs() {
+    let html = "";
+
+    herbs.forEach((herb) => {
+        html += createHerbCard(herb);
+    });
+
+    herbsContainer.innerHTML = html;
+}
+
+function init() {
+    renderHerbs();
+}
+
+//! INIT
+init();
+
