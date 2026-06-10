@@ -63,6 +63,21 @@ function getSymptomsData() {
         );
 }
 
+function getPopularSymptoms() {
+    /*
+        return getAllSymptoms()
+            .slice(0, 6);
+    */
+    return [
+        "stressz",
+        "köhögés",
+        "megfázás",
+        "álmatlanság",
+        "hányinger",
+        "torokfájás"
+    ];
+}
+
 //! ARTICLES
 
 function getArticlesById(id) {
