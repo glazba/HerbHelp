@@ -1,5 +1,11 @@
 const searchForm = document.querySelector("#search-form");
+
 const searchInput = document.querySelector("#search-input");
+
+const resultsContainer =
+    document.querySelector("#results-container");
+
+resultsContainer.innerHTML = "";
 
 searchForm.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -22,38 +28,12 @@ searchForm.addEventListener("submit", (event) => {
     } else {
         results.forEach((herb) => {
             resultsContainer.innerHTML = `
-                <article class="result-card">
-                    <a href="herb.html?id=${herb.id}">
-                        <h3>${herb.name}</h3>
-                    </a>
-                </article>
-            `;
+                               <article class="result-card">
+                                   <a href="herb.html?id=${herb.id}">
+                                       <h3>${herb.name}</h3>
+                                   </a>
+                               </article>
+                           `;
         });
     }
 });
-
-/* 
-! Transfered to js/data.js
-const herbs = [
-    {
-        id: 1,
-        name: "kamilla",
-        symptoms: ["torokfájás", "stressz"],
-        description: "Gyulladáscsökkentő és nyugtató hatású."
-    },
-    {
-        id: 2,
-        name: "kakukkfű",
-        symptoms: ["köhögés", "megfázás"],
-        description: "Légúti problémák esetén használják."
-    },
-    {
-        id: 3,
-        name: "citromfű",
-        symptoms: ["stressz", "álmatlanság", "alvászavar"],
-        description: "Nyugtató hatású gyógynövény"
-    }
-];
- */
-const resultsContainer = document.querySelector("#results-container");
-resultsContainer.innerHTML = "";
