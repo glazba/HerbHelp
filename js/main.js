@@ -9,6 +9,8 @@ const searchInput =
 const resultsContainer =
     document.querySelector("#results-container");
 
+const featuredHerbsContainer =
+    document.querySelector("#featured-herbs-container");
 
 //! FUNCTIONS
 
@@ -41,6 +43,40 @@ function renderResults(results) {
     resultsContainer.innerHTML = html;
 }
 
+function createFeaturedHerbCard(herb) {
+    return `
+        <article class="herb-card">
+            <img
+                src="${herb.image}"
+                alt="${herb.name}"
+            >
+            <div class="herb-content">
+                <h3>${herb.name}</h3>
+                <p>${herb.description}</p>
+                <a href="herb.html?id=${herb.id}">
+                    Tovább
+                </a>
+            </div>
+        </article>
+    `;
+}
+
+function renderFeaturedHerbs() {
+    let html = "";
+
+    herbs.forEach((herb) => {
+        html +=
+            createFeaturedHerbCard(herb);
+    });
+
+    featuredHerbsContainer.innerHTML =
+        html;
+}
+
+function init() {
+    renderFeaturedHerbs();
+}
+
 searchForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
@@ -61,3 +97,6 @@ searchForm.addEventListener("submit", (event) => {
 
     renderResults(results);
 });
+
+//! INIT
+init();
