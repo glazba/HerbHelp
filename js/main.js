@@ -16,27 +16,42 @@ searchForm.addEventListener("submit", (event) => {
     );
 
     if (results.length === 0) {
-        console.log("Nincs találat.");
-        //return;
+        resultsContainer.innerHTML =
+            "<p>Nincs találat.</p>";
+        return;
     } else {
         results.forEach((herb) => {
-            console.log(herb.name);
+            resultsContainer.innerHTML = `
+                <article class="result-card">
+                    <a href="herb.html?id=${herb.id}">
+                        <h3>${herb.name}</h3>
+                    </a>
+                </article>
+            `;
         });
     }
 });
 
 const herbs = [
     {
+        id: 1,
         name: "kamilla",
-        symptoms: ["torokfájás", "stressz"]
+        symptoms: ["torokfájás", "stressz"],
+        description: "Gyulladáscsökkentő és nyugtató hatású."
     },
     {
+        id: 2,
         name: "kakukkfű",
-        symptoms: ["köhögés", "megfázás"]
+        symptoms: ["köhögés", "megfázás"],
+        description: "Légúti problémák esetén használják."
     },
     {
+        id: 3,
         name: "citromfű",
-        symptoms: ["stressz", "álmatlanság", "alvászavar"]
+        symptoms: ["stressz", "álmatlanság", "alvászavar"],
+        description: "Nyugtató hatású gyógynövény"
     }
 ];
 
+const resultsContainer = document.querySelector("#results-container");
+resultsContainer.innerHTML = "";
