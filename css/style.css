@@ -268,3 +268,39 @@ nav ul {
   font-size: 2.5rem;
   margin-bottom: 1rem;
 }
+
+/*! ARTICLE-DETAIL */
+
+.article-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+#article-title {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+#article-description {
+  font-size: 1.1rem;
+  color: var(--secondary-color);
+  margin-bottom: 2rem;
+}
+
+#article-content {
+  line-height: 1.8;
+}
+
+/*! HERBS.HTML */
+
+.page-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+}
+
+.page-description{
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 3rem;
+}
