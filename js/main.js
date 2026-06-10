@@ -29,9 +29,18 @@ function searchHerbs(searchTerm) {
 
 function createResultCard(herb) {
     return `
-        <article class="result-card">
+        <article class="herb-card">
             <a href="herb.html?id=${herb.id}">
-                <h3>${herb.name}</h3>
+                <img
+                    src="${herb.image}"
+                    alt="${herb.name}"
+                >
+        
+                <div class="herb-content">
+                    <h3>${herb.name}</h3>
+                    <p>${herb.description}</p>
+                </div>
+                
             </a>
         </article>    
     `;
@@ -47,20 +56,37 @@ function renderResults(results) {
     resultsContainer.innerHTML = html;
 }
 
+function handleSearch(searchTerm) {
+    const results =
+        searchHerbs(searchTerm);
+
+    if (results.length === 0) {
+        resultsContainer.innerHTML = `
+            <p>Nem találtunk megfelelő gyógynövényt.</p>
+        `;
+
+        return;
+    }
+
+    renderResults(results);
+}
+
+
 function createFeaturedHerbCard(herb) {
     return `
         <article class="herb-card">
-            <img
-                src="${herb.image}"
-                alt="${herb.name}"
-            >
-            <div class="herb-content">
-                <h3>${herb.name}</h3>
-                <p>${herb.description}</p>
-                <a href="herb.html?id=${herb.id}">
-                    Tovább
-                </a>
-            </div>
+            <a href="herb.html?id=${herb.id}">
+                <img
+                    src="${herb.image}"
+                    alt="${herb.name}"
+                >
+
+                <div class="herb-content">
+                    <h3>${herb.name}</h3>
+                    <p>${herb.description}</p>
+                </div>
+
+            </a>
         </article>
     `;
 }
@@ -77,7 +103,8 @@ function renderFeaturedHerbs() {
         html;
 }
 
-function createPopularSymptonBtn(symptom) {
+
+function createPopularSymptomBtn(symptom) {
     return `
         <button
             class="symptom-btn"
@@ -91,7 +118,7 @@ function createPopularSymptonBtn(symptom) {
 function renderPopularSymptoms() {
     const symptoms =
         [...new Set(
-            herbs.flatMan((herb) =>
+            herbs.flatMap((herb) =>
                 herb.symptoms)
         )];
 
@@ -101,23 +128,42 @@ function renderPopularSymptoms() {
 
     symptoms.forEach((symptom) => {
         html +=
-            createPopularSymptonBtn(symptom);
+            createPopularSymptomBtn(symptom);
     });
 
     popularSymptomsContainer.innerHTML =
         html;
 }
 
+
+function setupPopularSymptomsEvents() {
+    const symptomButtons =
+        document.querySelectorAll(".symptom-btn");
+
+    symptomButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            const symptom =
+                button.textContent
+                    .trim()
+                    .toLowerCase();
+
+            searchInput.value = symptom;
+
+            handleSearch(symptom);
+        });
+    });
+}
+
 function init() {
     renderFeaturedHerbs();
     renderPopularSymptoms();
+    setupPopularSymptomsEvents();
 }
 
 searchForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    resultsContainer.innerHTML = "";
-
+    /*  resultsContainer.innerHTML = ""; */
     const searchTerm =
         searchInput.value
             .trim()
@@ -128,10 +174,7 @@ searchForm.addEventListener("submit", (event) => {
         return;
     }
 
-    const results =
-        searchHerbs(searchTerm);
-
-    renderResults(results);
+    handleSearch(searchTerm);
 });
 
 //! INIT
