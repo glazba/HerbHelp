@@ -12,6 +12,10 @@ const resultsContainer =
 const featuredHerbsContainer =
     document.querySelector("#featured-herbs-container");
 
+const popularSymptomsContainer =
+    document.querySelector("#popular-symptoms-container");
+
+
 //! FUNCTIONS
 
 function searchHerbs(searchTerm) {
@@ -73,8 +77,40 @@ function renderFeaturedHerbs() {
         html;
 }
 
+function createPopularSymptonBtn(symptom) {
+    return `
+        <button
+            class="symptom-btn"
+            type="button"
+        >
+            ${symptom}
+        </button>
+    `;
+}
+
+function renderPopularSymptoms() {
+    const symptoms =
+        [...new Set(
+            herbs.flatMan((herb) =>
+                herb.symptoms)
+        )];
+
+    symptoms.sort();
+
+    let html = "";
+
+    symptoms.forEach((symptom) => {
+        html +=
+            createPopularSymptonBtn(symptom);
+    });
+
+    popularSymptomsContainer.innerHTML =
+        html;
+}
+
 function init() {
     renderFeaturedHerbs();
+    renderPopularSymptoms();
 }
 
 searchForm.addEventListener("submit", (event) => {
