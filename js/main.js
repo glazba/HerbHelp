@@ -32,30 +32,33 @@ function renderResults(results) {
 
 
 function renderFeaturedHerbs() {
+    const featuredHerbs =
+        getFeaturedHerbs();
+
     let html = "";
-    
-    herbs.forEach((herb) => {
+
+    featuredHerbs.forEach((herb) => {
         html +=
-        createHerbCard(herb);
+            createHerbCard(herb);
     });
-    
+
     featuredHerbsContainer.innerHTML =
-    html;
+        html;
 }
 
 function renderPopularSymptoms() {
     const symptoms =
-    getAllSymptoms();
-    
+        getAllSymptoms();
+
     let html = "";
-    
+
     symptoms.forEach((symptom) => {
         html +=
-        createPopularSymptomBtn(symptom);
+            createPopularSymptomBtn(symptom);
     });
-    
+
     popularSymptomsContainer.innerHTML =
-    html;
+        html;
 }
 
 function handleSearch(searchTerm) {

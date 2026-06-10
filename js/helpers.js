@@ -1,12 +1,6 @@
 //* Reusable data processing and search helper functions
 
-function getAllSymptoms() {
-    return [...new Set(
-        herbs.flatMap(
-            (herb => herb.symptoms)
-        )
-    )].sort();
-}
+//! HERBS
 
 function searchHerbs(searchTerm) {
     return herbs.filter((herb) =>
@@ -21,6 +15,20 @@ function getHerbById(id) {
     return herbs.find((herb) =>
         herb.id === id
     );
+}
+
+function getFeaturedHerbs() {
+    return herbs.slice(0, 3);
+}
+
+//! SYMPTOMS
+
+function getAllSymptoms() {
+    return [...new Set(
+        herbs.flatMap(
+            (herb => herb.symptoms)
+        )
+    )].sort();
 }
 
 function getSymptomsData() {
@@ -54,3 +62,13 @@ function getSymptomsData() {
                 )
         );
 }
+
+//! ARTICLES
+
+function getArticlesById(id) {
+    return articles
+        .find((article) =>
+            article.id === id
+        );
+}
+

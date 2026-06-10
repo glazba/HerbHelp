@@ -4,35 +4,29 @@
 
 function createHerbCard(herb) {
     return `
-        <article class="herb-card">
-            
-            <a href="herb.html?id=${herb.id}">
-                
-                <img
-                    src="${herb.image}"
-                    alt="${herb.name}"
-                >
+<article class="herb-card">
 
-                <div class="herb-content">
-                    <h3>${herb.name}</h3>
-                    <p>${herb.description}</p>
-                </div>
+    <a href="herb.html?id=${herb.id}">
 
-            </a>
+        <img src="${herb.image}" alt="${herb.name}">
 
-        </article>
-    `;
+        <div class="herb-content">
+            <h3>${herb.name}</h3>
+            <p>${herb.description}</p>
+        </div>
+
+    </a>
+
+</article>
+`;
 }
 
 function createPopularSymptomBtn(symptom) {
     return `
-        <button
-            class="symptom-btn"
-            type="button"
-        >
-            ${symptom}
-        </button>
-    `;
+<button class="symptom-btn" type="button">
+    ${symptom}
+</button>
+`;
 }
 
 function createSymptomCard(symptomData) {
@@ -51,6 +45,19 @@ function createSymptomCard(symptomData) {
         <article class="symptom-card">
             <h2>${symptomData.name}</h2>
             <ol>${herbsList}</ol>
+        </article>
+    `;
+}
+
+function createArticleCard(article) {
+    return `
+        <article class="herb-card">
+            <a href="article.html?id=${article.id}">
+                <div class="herb-content">
+                    <h3>${article.title}</h3>
+                    <p>${article.description}</p>
+                </div>
+            </a>
         </article>
     `;
 }

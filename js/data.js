@@ -1,4 +1,5 @@
 //* Static application data (herbs, articles and other content)
+
 const herbs = [
     {
         id: 1,
@@ -120,7 +121,7 @@ const herbs = [
         name: "Bodza",
         symptoms: ["megfázás", "köhögés", "láz"],
         description:
-            "A bodzavirág népszerú gyógynövény, amelyet légúti panaszok és megfázás esetén alkalmaznak.",
+            "A bodzavirág népszerű gyógynövény, amelyet légúti panaszok és megfázás esetén alkalmaznak.",
         usage:
             "Tea vagy szörp formájában fogyasztható.",
         warnings:
@@ -142,3 +143,24 @@ const herbs = [
             "assets/koromvirag.jpg"
     },
 ]
+
+const articles = [
+    {
+        id: 1,
+        title: "Hogyan készítsünk gyógynövényteát?",
+        description: "Lorem ipsum dolor sit amet.",
+        content: ""
+    },
+    {
+        id: 2,
+        title: "Mikor forduljunk orvoshoz?",
+        description: "",
+        content: ""
+    },
+    {
+        id: 3,
+        title: "Gyógynövények biztonságos használata",
+        description: "",
+        content: ""
+    }
+];
