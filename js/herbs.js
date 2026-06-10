@@ -2,6 +2,13 @@
 const herbsContainer =
     document.querySelector("#herbs-container");
 
+//! Error
+if (!herbsContainer) {
+    throw new Error(
+        "#herbs-container not found."
+    );
+}
+
 //! FUNCTIONS
 function createHerbCard(herb) {
     return `

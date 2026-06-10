@@ -12,7 +12,13 @@
   --secondary-color: #b89b72;
 
   --text-color: #3d352a;
+
+  --border-radius: 16px;
+  --container-width: 1200px;
+
+  --transition: 0.3s ease-in-out;
 }
+/*! GLOBAL */
 
 body {
   background-color: var(--bg-color);
@@ -20,6 +26,13 @@ body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
 }
+
+a {
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+/*! HEADER */
 
 header {
   padding: 1rem 2rem;
@@ -37,10 +50,7 @@ nav ul {
   gap: 2rem;
 }
 
-a {
-  text-decoration: none;
-  color: var(--text-color);
-}
+/*! HERO */
 
 #hero {
   text-align: center;
@@ -56,6 +66,8 @@ a {
   max-width: 600px;
   margin: 0 auto;
 }
+
+/*! POPULAR SYMPTOMS */
 
 #popular-symptoms {
   text-align: center;
@@ -78,7 +90,7 @@ a {
   padding: 0.8rem 1.5rem;
   border-radius: 999px;
   cursor: pointer;
-  transition: 0.3s ease-in-out;
+  transition: var(--transition);
 }
 
 .symptom-container button:hover {
@@ -86,6 +98,8 @@ a {
   color: #fff;
   transform: translateY(-2px);
 }
+
+/*! FEATURED HERBS */
 
 #featured-herbs {
   padding: 4rem 2rem;
@@ -100,9 +114,10 @@ a {
 
 .herb-card {
   background-color: var(--card-color);
-  border-radius: 16px;
+  border-radius: var(--border-radius);
   overflow: hidden;
-  transition: 0.3s ease-in-out;
+  transition: var(--transition);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
 }
 
 .herb-card:hover {
@@ -122,9 +137,7 @@ a {
   margin-bottom: 0.75rem;
 }
 
-.herb-card {
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-}
+/*! SEARCH RESULTS */
 
 #results {
   padding: 4rem 2rem;
@@ -137,7 +150,7 @@ a {
 }
 
 .result-card {
-  background-color: var(--bg-color);
+  background-color: var(--card-color);
   padding: 1rem;
   border-radius: 12px;
   border-left: 5px solid var(--primary-color);
