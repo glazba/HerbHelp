@@ -48,7 +48,7 @@ function renderFeaturedHerbs() {
 
 function renderPopularSymptoms() {
     const symptoms =
-        getPopularSymptoms();
+        symptomService.getPopularSymptoms();
 
     let html = "";
 

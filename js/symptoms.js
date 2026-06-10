@@ -9,7 +9,7 @@ const symptomsContainer =
 
 function renderSymptoms() {
     const symptoms =
-        getSymptomsData();
+        symptomService.getSymptomsData();
 
     let html = "";
 
