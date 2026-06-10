@@ -11,42 +11,6 @@ function normalizeText(text) {
         .replace(/[\u0300-\u036f]/g, "");
 }
 
-
-//! HERBS
-
-function searchHerbs(searchTerm) {
-    const normalizedSearchTerm =
-        normalizeText(searchTerm);
-
-    return herbs.filter((herb) => {
-        const herbName =
-            normalizeText(herb.name);
-
-        const symptoms =
-            herb.symptoms.map((symptom) =>
-                normalizeText(symptom)
-            );
-
-        return herbName.includes(
-            normalizedSearchTerm
-        ) ||
-            symptoms.includes(
-                normalizedSearchTerm
-            );
-    });
-}
-
-function getHerbById(id) {
-    return herbs.find((herb) =>
-        herb.id === id
-    );
-}
-
-function getFeaturedHerbs() {
-    return herbs.slice(0, 3);
-}
-
-
 //! SYMPTOMS
 
 function getAllSymptoms() {
@@ -107,10 +71,9 @@ function getPopularSymptoms() {
 
 //! ARTICLES
 
-function getArticlesById(id) {
+function getArticleById(id) {
     return articles
         .find((article) =>
             article.id === id
         );
 }
-

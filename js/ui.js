@@ -1,32 +1,34 @@
 //* Reusable UI component and HTML rendering functions
 
-//! FUNCTIONS
+//! HERB CARDS
 
 function createHerbCard(herb) {
     return `
-<article class="herb-card">
+        <article class="herb-card">
 
-    <a href="herb.html?id=${herb.id}">
+            <a href="herb.html?id=${herb.id}">
 
-        <img src="${herb.image}" alt="${herb.name}">
+                <img src="${herb.image}" alt="${herb.name}">
 
-        <div class="herb-content">
-            <h3>${herb.name}</h3>
-            <p>${herb.description}</p>
-        </div>
-
-    </a>
-
-</article>
-`;
+                <div class="herb-content">
+                    <h3>${herb.name}</h3>
+                    <p>${herb.description}</p>
+                
+                </div>
+            </a>
+        </article>
+    `;
 }
+
+
+//! SYMPTOM COMPONENTS
 
 function createPopularSymptomBtn(symptom) {
     return `
-<button class="symptom-btn" type="button">
-    ${symptom}
-</button>
-`;
+        <button class="symptom-btn" type="button">
+            ${symptom}
+        </button>
+    `;
 }
 
 function createSymptomCard(symptomData) {
@@ -48,6 +50,9 @@ function createSymptomCard(symptomData) {
         </article>
     `;
 }
+
+
+//! ARTICLE CARDS
 
 function createArticleCard(article) {
     return `

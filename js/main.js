@@ -33,7 +33,7 @@ function renderResults(results) {
 
 function renderFeaturedHerbs() {
     const featuredHerbs =
-        getFeaturedHerbs();
+        herbService.getFeaturedHerbs();
 
     let html = "";
 
@@ -63,7 +63,9 @@ function renderPopularSymptoms() {
 
 function handleSearch(searchTerm) {
     const results =
-        searchHerbs(searchTerm);
+        herbService.searchHerbs(
+            searchTerm
+        );
 
     if (results.length === 0) {
         resultsContainer.innerHTML = `

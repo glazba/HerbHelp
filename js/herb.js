@@ -9,7 +9,7 @@ const herbId =
 // console.log(herbId);
 
 const herb =
-    getHerbById(herbId);
+    herbService.getHerbById(herbId);
 
 //! Error
 if (!herb) {

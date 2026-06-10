@@ -11,7 +11,7 @@ const articleId =
     );
 
 const article =
-    getArticlesById(articleId);
+    getArticleById(articleId);
 
 
 //! GUARD
