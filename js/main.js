@@ -14,7 +14,12 @@ const resultsContainer =
 
 function searchHerbs(searchTerm) {
     return herbs.filter((herb) =>
-        herb.symptoms.includes(searchTerm));
+        herb.name
+            .toLowerCase()
+            .includes(searchTerm) ||
+        herb.symptoms
+            .toLowerCase()
+            .includes(searchTerm));
 }
 
 function createResultCard(herb) {
@@ -31,7 +36,7 @@ function renderResults(results) {
     let html = "";
 
     results.forEach((herb) => {
-        html = createResultCard(herb);
+        html += createResultCard(herb);
     });
 
     resultsContainer.innerHTML = html;
