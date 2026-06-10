@@ -12,6 +12,7 @@
   --secondary-color: #b89b72;
 
   --text-color: #3d352a;
+  --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
 
   --border-radius: 16px;
   --container-width: 1200px;
@@ -30,6 +31,12 @@ body {
 a {
   text-decoration: none;
   color: var(--text-color);
+}
+
+footer {
+  text-align: center;
+  padding: 3rem 2rem;
+  margin-top: 5rem;
 }
 
 /*! HEADER */
@@ -62,10 +69,21 @@ nav ul {
 }
 
 /*! HERO */
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
 
 #hero {
   text-align: center;
   padding: 5rem 2rem;
+}
+
+.hero-badge {
+  color: var(--primary-color);
+  font-weight: 600;
+  margin-bottom: 1rem;
 }
 
 #hero h1 {
@@ -76,6 +94,43 @@ nav ul {
 #hero p {
   max-width: 600px;
   margin: 0 auto;
+}
+
+/*! SEARCH */
+
+#search {
+  background-color: var(--card-color);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  margin-bottom: 4rem;
+  box-shadow: var(--box-shadow);
+}
+
+#search-form {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+#search-input {
+  flex: 1;
+  padding: 1rem;
+  border: 2px solid var(--primary-color);
+  border-radius: var(--border-radius);
+}
+
+#search-form button {
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  padding: 1rem 1.5rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+#search-form button:hover {
+  background-color: var(--secondary-color);
 }
 
 /*! POPULAR SYMPTOMS */
@@ -90,7 +145,6 @@ nav ul {
   justify-content: center;
   flex-wrap: wrap;
   gap: 1rem;
-
   margin-top: 2rem;
 }
 
@@ -128,7 +182,7 @@ nav ul {
   border-radius: var(--border-radius);
   overflow: hidden;
   transition: var(--transition);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--box-shadow);
 }
 
 .herb-card:hover {
@@ -172,11 +226,45 @@ nav ul {
   background-color: var(--card-color);
   padding: 1.5rem;
   border-radius: var(--border-radius);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--box-shadow);
 }
 
 #symptoms-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
+}
+
+/*! HERB-DETAIL */
+
+.detail-card {
+  background-color: var(--card-color);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+#herb-image {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: var(--border-radius);
+  margin: 1.5rem 0 2rem;
+}
+
+.detail-card section {
+  margin-top: 2rem;
+}
+.detail-card h2 {
+  margin-bottom: 0.75rem;
+  color: var(--primary-color);
+}
+
+#herb-symptoms {
+  padding-left: 1.5rem;
+}
+
+#herb-name {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
 }

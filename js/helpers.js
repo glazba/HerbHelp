@@ -1,5 +1,6 @@
 //* Reusable data processing and search helper functions
 
+
 //! SEARCH
 
 function normalizeText(text) {
@@ -9,6 +10,7 @@ function normalizeText(text) {
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "");
 }
+
 
 //! HERBS
 
@@ -43,6 +45,7 @@ function getHerbById(id) {
 function getFeaturedHerbs() {
     return herbs.slice(0, 3);
 }
+
 
 //! SYMPTOMS
 
@@ -100,6 +103,7 @@ function getPopularSymptoms() {
         "torokfájás"
     ];
 }
+
 
 //! ARTICLES
 
