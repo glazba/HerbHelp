@@ -18,34 +18,6 @@ const popularSymptomsContainer =
 
 //! FUNCTIONS
 
-function searchHerbs(searchTerm) {
-    return herbs.filter((herb) =>
-        herb.name
-            .toLowerCase()
-            .includes(searchTerm) ||
-        herb.symptoms
-            .includes(searchTerm));
-}
-/* 
-function createResultCard(herb) {
-    return `
-        <article class="herb-card">
-            <a href="herb.html?id=${herb.id}">
-                <img
-                    src="${herb.image}"
-                    alt="${herb.name}"
-                >
-        
-                <div class="herb-content">
-                    <h3>${herb.name}</h3>
-                    <p>${herb.description}</p>
-                </div>
-
-            </a>
-        </article>    
-    `;
-}
- */
 function renderResults(results) {
     let html = "";
 
@@ -70,27 +42,6 @@ function handleSearch(searchTerm) {
 
     renderResults(results);
 }
-
-/* 
-function createFeaturedHerbCard(herb) {
-    return `
-        <article class="herb-card">
-            <a href="herb.html?id=${herb.id}">
-                <img
-                    src="${herb.image}"
-                    alt="${herb.name}"
-                >
-
-                <div class="herb-content">
-                    <h3>${herb.name}</h3>
-                    <p>${herb.description}</p>
-                </div>
-
-            </a>
-        </article>
-    `;
-}
- */
 
 function renderFeaturedHerbs() {
     let html = "";
@@ -118,12 +69,7 @@ function createPopularSymptomBtn(symptom) {
 
 function renderPopularSymptoms() {
     const symptoms =
-        [...new Set(
-            herbs.flatMap((herb) =>
-                herb.symptoms)
-        )];
-
-    symptoms.sort();
+        getAllSymptoms();
 
     let html = "";
 

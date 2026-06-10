@@ -7,10 +7,8 @@ const herbId =
 // console.log(herbId);
 
 const herb =
-    herbs.find(
-        (herb) => herb.id === herbId
-    );
-
+    getHerbById();
+    
 //! Error
 if (!herb) {
     document.body.innerHTML = `
@@ -38,7 +36,7 @@ const herbWarnings =
 const herbImage =
     document.querySelector("#herb-image");
 
-    
+
 //! FUNCTIONS
 
 function renderHerb() {

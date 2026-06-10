@@ -6,35 +6,6 @@ const symptomsContainer =
 
 //! FUNCTIONS
 
-function getSymptomsData() {
-    const symptomsMap = {};
-
-    herbs.forEach((herb) => {
-        herb.symptoms.forEach((symptom) => {
-
-            if (!symptomsMap[symptom]) {
-                symptomsMap[symptom] = {
-                    name: symptom,
-                    herbsToUse: []
-                };
-            }
-
-            symptomsMap[symptom].herbsToUse.push({
-                id: herb.id,
-                name: herb.name
-            });
-        });
-    });
-
-    return Object.values(symptomsMap)
-        .sort((a, b) =>
-            a.name.localeCompare(
-                b.name,
-                "hu"
-            )
-        );
-}
-
 function createSymptomCard(symptomData) {
     const herbsList =
         symptomData.herbsToUse
