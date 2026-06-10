@@ -1,4 +1,4 @@
-//* 
+//* Reusable data processing and search helper functions
 
 function getAllSymptoms() {
     return [...new Set(

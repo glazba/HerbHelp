@@ -1,3 +1,5 @@
+//* Main page logic (search, results, featured herbs and popular symptoms)
+
 //! DOM
 
 const searchForm =
@@ -28,6 +30,34 @@ function renderResults(results) {
     resultsContainer.innerHTML = html;
 }
 
+
+function renderFeaturedHerbs() {
+    let html = "";
+    
+    herbs.forEach((herb) => {
+        html +=
+        createHerbCard(herb);
+    });
+    
+    featuredHerbsContainer.innerHTML =
+    html;
+}
+
+function renderPopularSymptoms() {
+    const symptoms =
+    getAllSymptoms();
+    
+    let html = "";
+    
+    symptoms.forEach((symptom) => {
+        html +=
+        createPopularSymptomBtn(symptom);
+    });
+    
+    popularSymptomsContainer.innerHTML =
+    html;
+}
+
 function handleSearch(searchTerm) {
     const results =
         searchHerbs(searchTerm);
@@ -42,46 +72,6 @@ function handleSearch(searchTerm) {
 
     renderResults(results);
 }
-
-function renderFeaturedHerbs() {
-    let html = "";
-
-    herbs.forEach((herb) => {
-        html +=
-            createHerbCard(herb);
-    });
-
-    featuredHerbsContainer.innerHTML =
-        html;
-}
-
-
-function createPopularSymptomBtn(symptom) {
-    return `
-        <button
-            class="symptom-btn"
-            type="button"
-        >
-            ${symptom}
-        </button>
-    `;
-}
-
-function renderPopularSymptoms() {
-    const symptoms =
-        getAllSymptoms();
-
-    let html = "";
-
-    symptoms.forEach((symptom) => {
-        html +=
-            createPopularSymptomBtn(symptom);
-    });
-
-    popularSymptomsContainer.innerHTML =
-        html;
-}
-
 
 function setupPopularSymptomsEvents() {
     const symptomButtons =

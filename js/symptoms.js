@@ -1,3 +1,4 @@
+//* Symptoms page logic and related herbs rendering
 //! DOM
 
 const symptomsContainer =
@@ -5,27 +6,6 @@ const symptomsContainer =
 
 
 //! FUNCTIONS
-
-function createSymptomCard(symptomData) {
-    const herbsList =
-        symptomData.herbsToUse
-            .map((herb) => `
-                <li>
-                    <a href="herb.html?id=${herb.id}">
-                        ${herb.name}
-                    </a>
-                </li>
-            `)
-            .join("");
-
-    return `
-        <article class="symptom-card">
-            <h2>${symptomData.name}</h2>
-            <ol>${herbsList}</ol>
-        </article>
-    `;
-}
-
 
 function renderSymptoms() {
     const symptoms =

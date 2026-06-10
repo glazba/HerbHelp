@@ -1,4 +1,4 @@
-//! DOM
+//* Reusable UI component and HTML rendering functions
 
 //! FUNCTIONS
 
@@ -19,9 +19,39 @@ function createHerbCard(herb) {
                 </div>
 
             </a>
-            
+
         </article>
     `;
 }
 
-//! INIT
+function createPopularSymptomBtn(symptom) {
+    return `
+        <button
+            class="symptom-btn"
+            type="button"
+        >
+            ${symptom}
+        </button>
+    `;
+}
+
+function createSymptomCard(symptomData) {
+    const herbsList =
+        symptomData.herbsToUse
+            .map((herb) => `
+                <li>
+                    <a href="herb.html?id=${herb.id}">
+                        ${herb.name}
+                    </a>
+                </li>
+            `)
+            .join("");
+
+    return `
+        <article class="symptom-card">
+            <h2>${symptomData.name}</h2>
+            <ol>${herbsList}</ol>
+        </article>
+    `;
+}
+

@@ -1,3 +1,5 @@
+//* Single herb page logic and herb details rendering
+
 const params =
     new URLSearchParams(window.location.search);
 
@@ -8,7 +10,7 @@ const herbId =
 
 const herb =
     getHerbById();
-    
+
 //! Error
 if (!herb) {
     document.body.innerHTML = `

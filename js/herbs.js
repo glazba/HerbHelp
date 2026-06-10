@@ -1,3 +1,5 @@
+//* Herbs page logic and herb list rendering
+
 //! DOM
 const herbsContainer =
     document.querySelector("#herbs-container");

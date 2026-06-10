@@ -1,5 +1,5 @@
+//* Static application data (herbs, articles and other content)
 const herbs = [
-
     {
         id: 1,
         name: "Kamilla",
