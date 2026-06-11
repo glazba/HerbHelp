@@ -72,7 +72,10 @@ function handleSearch(searchTerm) {
 
     if (results.length === 0) {
         resultsContainer.innerHTML = `
-            <p>Nem találtunk megfelelő gyógynövényt.</p>
+            <div class="empty-state">
+                <h3>Nincs találat</h3>
+                <p>Nem találtunk a keresésnek megfelelő gyógynövényt.</p>
+            </div>
         `;
 
         return;

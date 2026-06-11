@@ -274,13 +274,6 @@ nav ul li a:hover {
   gap: 2rem;
 }
 
-.no-results {
-  text-align: center;
-  padding: 2rem;
-  background: var(--card-color);
-  border-radius: var(--border-radius);
-}
-
 /*! HERB-DETAIL */
 
 .detail-card {
@@ -353,6 +346,25 @@ nav ul li a:hover {
   text-align: center;
   max-width: 700px;
   margin: 0 auto 3rem;
+}
+
+/*! EMPTY STATES */
+
+.empty-state {
+  background-color: var(--card-color);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  text-align: center;
+}
+
+.empty-state h3 {
+  color: var(--primary-color);
+  margin-bottom: 0.75rem;
+}
+
+.empty-state p {
+  color: var(--text-color);
 }
 
 /*! TABLET */
