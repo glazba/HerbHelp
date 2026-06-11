@@ -46,7 +46,7 @@ function createSymptomCard(symptomData) {
 
     return `
         <article class="symptom-card">
-            <h2>${symptomData.name}</h2>
+            <h2>${capitalize(symptomData.name)}</h2>
             <ol>${herbsList}</ol>
         </article>
     `;

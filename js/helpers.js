@@ -10,3 +10,8 @@ function normalizeText(text) {
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "");
 }
+
+function capitalize(text) {
+    return text.charAt(0).toUpperCase()
+        + text.slice(1);
+}
