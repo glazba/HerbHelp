@@ -25,11 +25,11 @@ const herbs = [
             "megfázás"
         ],
         description:
-            "Légúti problémák esetén használják.",
+            "A kakukkfű hagyományosan légúti panaszok, köhögés és megfázás esetén alkalmazott gyógynövény. Illóolajai hozzájárulhatnak a légutak tisztításához.",
         usage:
-            "Tea formájában fogyasztható.",
+            "Leggyakrabban tea formájában fogyasztják, de inhalálásra és szirupok összetevőjeként is használható.",
         warnings:
-            "Lorem ipsum.",
+            "Nagy mennyiségben emésztőrendszeri panaszokat okozhat. Terhesség alatt alkalmazása előtt ajánlott szakember véleményét kikérni.",
         image:
             "assets/kakukkfu.jpg"
     },
@@ -46,7 +46,7 @@ const herbs = [
         usage:
             "Tea formájában fogyasztható.",
         warnings:
-            "Lorem ipsum.",
+            "Általában jól tolerálható, azonban túlzott fogyasztása álmosságot és csökkent koncentrációt okozhat.",
         image:
             "assets/citromfu.jpg"
     },
@@ -79,7 +79,7 @@ const herbs = [
     {
         id: 6,
         name: "Csalán",
-        symptoms: ["allergia", "fáradtság", "izületi panaszok"],
+        symptoms: ["allergia", "fáradtság", "ízületi panaszok"],
         description:
             "A csalán vitaminokban és ásványi anyagokban gazdag növény, amelyet gyakran alkalmaznak allergiás tünetek és fáradékonyság esetén.",
         usage:
@@ -105,7 +105,7 @@ const herbs = [
     {
         id: 8,
         name: "Hársfa",
-        symptoms: ["megvázás", "köhögés", "stressz"],
+        symptoms: ["megfázás", "köhögés", "stressz"],
         description:
             "A hársfavirág hagyományosan megfázás és köhögés esetén alkalmazott növény.",
         usage:
@@ -147,10 +147,8 @@ const herbs = [
         symptoms: ["stressz", "szorongás", "hangulatingadozás"],
         description:
             "Az orbáncfű hagyományosan a hangulat javítására és az idegrendszer támogatására használt gyógynövény.",
-
         usage:
             "Leggyakrabban tea, kapszula vagy kivonat formájában alkalmazzák stressz, enyhe szorongás és hangulatingadozás esetén.",
-
         warnings:
             "Számos gyógyszerrel kölcsönhatásba léphet, ezért rendszeres gyógyszerszedés mellett használata előtt szakemberrel ajánlott konzultálni.",
         image:
@@ -162,38 +160,34 @@ const herbs = [
         symptoms: ["görcsök", "emésztési problémák", "menstruációs panaszok"],
         description:
             "A cickafark sokoldalú gyógynövény, amelyet emésztési panaszok és női egészségügyi problémák esetén alkalmaznak.",
-
         usage:
             "Tea formájában fogyasztható emésztési görcsök, puffadás vagy menstruációs panaszok enyhítésére.",
-
         warnings:
             "Fészkesvirágzatú növényekre érzékenyeknél allergiás reakciót válthat ki.",
         image:
             "assets/cickafark.jpg"
     },
-    /*     {
-            id: 13,
-            name: "Édeskömény",
-            symptoms: ["puffadás", "emésztési problémák"],
-            description:
-                "",
-            usage:
-                "",
-            warnings:
-                "",
-            image:
-                "assets/edeskomeny.jpg"
-        }, */
+    {
+        id: 13,
+        name: "Édeskömény",
+        symptoms: ["puffadás", "emésztési problémák"],
+        description:
+            "Az édeskömény aromás gyógynövény, amelyet elsősorban emésztési panaszok és puffadás enyhítésére használnak.",
+        usage:
+            "Tea vagy a magok rágása formájában alkalmazható emésztési problémák esetén.",
+        warnings:
+            "Ritka esetben allergiás reakciót válthat ki. Várandósság alatt használata előtt ajánlott szakemberrel konzultálni.",
+        image:
+            "assets/edeskomeny.jpg"
+    },
     {
         id: 14,
         name: "Aloe Vera",
         symptoms: ["bőrirritáció", "égés", "száraz bőr"],
         description:
             "Az aloe vera levelei gélszerű anyagot tartalmaznak, amelyet elsősorban bőrápolásra használnak.",
-
         usage:
             "Külsőleg alkalmazható kisebb égési sérülések, bőrirritációk és száraz bőr esetén.",
-
         warnings:
             "Belső fogyasztása csak megfelelő készítmény formájában javasolt.",
         image:
@@ -205,10 +199,8 @@ const herbs = [
         symptoms: ["májvédelem", "emésztési problémák", "méregtelenítés"],
         description:
             "A máriatövis legismertebb hatóanyaga a szilimarin, amely a máj védelmében játszhat szerepet.",
-
         usage:
             "Tea vagy étrend-kiegészítő formájában használják a májműködés támogatására.",
-
         warnings:
             "Krónikus betegségek vagy gyógyszerszedés esetén ajánlott szakember véleményét kikérni.",
         image:
@@ -227,7 +219,7 @@ const herbs = [
         image:
             "assets/rozmaring.jpg"
     }
-]
+];
 
 const articles = [
     {
