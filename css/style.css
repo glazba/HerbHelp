@@ -5,13 +5,13 @@
 }
 
 :root {
-  --bg-color: #f4ead7;
-  --card-color: #fffdf8;
-
-  --primary-color: #7b9e76;
-  --secondary-color: #b89b72;
-
+  --bg-color: #f2e7d5;
   --text-color: #3d352a;
+
+  --primary-color: #6f8f68;
+  --secondary-color: #c09a63;
+
+  --card-color: #fffaf4;
   --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
 
   --border-radius: 16px;
@@ -318,7 +318,12 @@ nav ul li a:hover {
   transition: var(--transition);
 }
 
-.symptoms-container ul li:hover {
+.symptoms-container ul li a {
+  transition: var(--transition);
+}
+
+.symptoms-container ul li:hover,
+.symptoms-container ul li a:hover {
   color: var(--secondary-color);
   text-decoration: underline;
 }
