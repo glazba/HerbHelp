@@ -5,8 +5,8 @@
 }
 
 :root {
-  --bg-color: #f5f0e6;
-  --card-color: #fff8ee;
+  --bg-color: #f4ead7;
+  --card-color: #fffdf8;
 
   --primary-color: #7b9e76;
   --secondary-color: #b89b72;
@@ -308,6 +308,19 @@ nav ul li a:hover {
 #herb-name {
   font-size: 2.5rem;
   margin-bottom: 1rem;
+}
+
+/*! SYMPTOMS */
+
+.symptoms-container ul li {
+  margin-left: 1rem;
+  width: fit-content;
+  transition: var(--transition);
+}
+
+.symptoms-container ul li:hover {
+  color: var(--secondary-color);
+  text-decoration: underline;
 }
 
 /*! ARTICLE-DETAIL */

@@ -36,11 +36,13 @@ function createSymptomCard(symptomData) {
     const herbsList =
         symptomData.herbsToUse
             .map((herb) => `
-                <li>
-                    <a href="herb.html?id=${herb.id}">
-                        ${herb.name}
-                    </a>
-                </li>
+                <ul>
+                    <li>
+                        <a href="herb.html?id=${herb.id}">
+                            ${herb.name}
+                        </a>
+                    </li>
+                </ul>
             `)
             .join("");
 
