@@ -49,8 +49,15 @@ function renderArticle() {
     articleDescription.textContent =
         article.description;
 
-    articleContent.textContent =
-        article.content;
+    articleContent.innerHTML =
+        article.content
+            .trim()
+            .split(/\n\s*\n/)
+            .map(
+                paragraph =>
+                    `<p>${paragraph}</p>`
+            )
+            .join("");
 }
 
 

@@ -337,6 +337,10 @@ nav ul li a:hover {
   line-height: 1.8;
 }
 
+#article-content p {
+  margin-bottom: 1.5rem;
+}
+
 /*! HERBS.HTML */
 
 .page-title {
