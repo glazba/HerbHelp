@@ -11,6 +11,7 @@
     <script src="js/data.js" defer></script>
     <script src="js/services/HerbService.js" defer></script>
     <script src="js/herb.js" defer></script>
+    <script src="js/navigation.js" defer></script>
 </head>
 
 <body>
@@ -19,7 +20,10 @@
             <nav>
                 <a class="logo" href="index.html">🌿 HerbHelp</a>
 
-                <ul>
+                <button id="menu-toggle" class="menu-toggle" aria-label="Menü">☰</button>
+
+                <ul id="nav-menu">
+
                     <li>
                         <a href="herbs.html">Gyógynövények</a>
                     </li>

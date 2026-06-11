@@ -12,6 +12,7 @@
     <script src="js/services/ArticleService.js" defer></script>
     <script src="js/ui.js" defer></script>
     <script src="js/articles.js" defer></script>
+    <script src="js/navigation.js" defer></script>
 </head>
 
 <body>
@@ -20,7 +21,10 @@
             <nav>
                 <a class="logo" href="index.html">🌿 HerbHelp</a>
 
-                <ul>
+                <button id="menu-toggle" class="menu-toggle" aria-label="Menü">☰</button>
+
+                <ul id="nav-menu">
+
                     <li>
                         <a href="herbs.html">Gyógynövények</a>
                     </li>
