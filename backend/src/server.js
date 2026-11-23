@@ -7,6 +7,7 @@ require("dotenv").config();
 const { testConnection } = require("./config/database");
 
 const herbRoutes = require("./routes/herbRoutes");
+const symptomRoutes = require("./routes//symptomRoutes");
 
 //! APP
 const app = express();
@@ -18,6 +19,7 @@ app.use(express.json());
 
 //! ROUTES
 app.use("/api/herbs", herbRoutes);
+app.use("/api/symptoms", symptomRoutes);
 
 app.get("/api/health", (req, res) => {
     res.status(200).json({
