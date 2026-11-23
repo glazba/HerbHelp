@@ -292,3 +292,13 @@ const articles = [
             A tudatos és felelős használat segít abban, hogy a gyógynövények előnyeit biztonságosan élvezhessük a mindennapokban.`
     }
 ];
+
+//! EXPORT DATA FOR BACKEND MIGRATION
+
+if (typeof module !== "undefined" && module.exports) {
+    module.exports = {
+        herbs,
+        articles
+    };
+}
+
