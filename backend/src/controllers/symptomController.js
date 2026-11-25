@@ -1,9 +1,8 @@
 const { pool } = require("../config/database");
 
+
 //! GET ALL SYMPTOMS
-
 const getAllSymptoms = async (req, res) => {
-
     try {
         const [rows] = await pool.query(`
             SELECT
@@ -17,7 +16,7 @@ const getAllSymptoms = async (req, res) => {
             LEFT JOIN herbs
                 ON herb_symptoms.herb_id = herbs.id
             ORDER BY symptoms.id ASC, herbs.id ASC
-            `);
+        `);
 
         //! FORMAT SYMPTOMS
         const formattedSymptoms = [];
@@ -63,9 +62,16 @@ const getAllSymptoms = async (req, res) => {
 
 
 //! GET SYMPTOM BY ID
-
 const getSymptomById = async (req, res) => {
-    const { id } = req.params;
+    const symptomId = Number(req.params.id);
+
+    //! ID VALIDATION
+    if (!Number.isInteger(symptomId) || symptomId <= 0) {
+        return res.status(400).json({
+            success: false,
+            message: "Invalid symptom ID."
+        });
+    }
 
     try {
         const [rows] = await pool.query(
@@ -83,7 +89,7 @@ const getSymptomById = async (req, res) => {
             WHERE symptoms.id = ?
             ORDER BY herbs.id ASC
             `,
-            [id]
+            [symptomId]
         );
 
         //! CHECK IF SYMPTOM EXISTS
@@ -127,7 +133,6 @@ const getSymptomById = async (req, res) => {
 
 
 //! CREATE SYMPTOM
-
 const createSymptom = async (req, res) => {
     const { name, herbIds } = req.body;
 
@@ -139,10 +144,10 @@ const createSymptom = async (req, res) => {
         });
     }
 
-    if (!Array.isArray(herbIds) || herbIds.length === 0) {
+    if (!Array.isArray(herbIds)) {
         return res.status(400).json({
             success: false,
-            message: "At least one herb must be assigned."
+            message: "Herb IDs must be provided as an array."
         });
     }
 
@@ -156,7 +161,7 @@ const createSymptom = async (req, res) => {
     ) {
         return res.status(400).json({
             success: false,
-            message: "Invalud herb ID."
+            message: "Invalid herb ID."
         });
     }
 
@@ -183,20 +188,22 @@ const createSymptom = async (req, res) => {
         }
 
         //! CHECK IF ALL HERBS EXIST
-        const placeholders = uniqueHerbIds.map(() => "?").join(", ");
+        if (uniqueHerbIds.length > 0) {
+            const placeholders = uniqueHerbIds.map(() => "?").join(", ");
 
-        const [existingHerbs] = await connection.query(
-            `SELECT id FROM herbs WHERE id IN (${placeholders})`,
-            uniqueHerbIds
-        );
+            const [existingHerbs] = await connection.query(
+                `SELECT id FROM herbs WHERE id IN (${placeholders})`,
+                uniqueHerbIds
+            );
 
-        if (existingHerbs.length !== uniqueHerbIds.length) {
-            await connection.rollback();
+            if (existingHerbs.length !== uniqueHerbIds.length) {
+                await connection.rollback();
 
-            return res.status(400).json({
-                success: false,
-                message: "One or more herbs do not exist."
-            });
+                return res.status(400).json({
+                    success: false,
+                    message: "One or more herbs do not exist."
+                });
+            }
         }
 
         //! INSERT SYMPTOM
@@ -208,15 +215,17 @@ const createSymptom = async (req, res) => {
         const symptomId = result.insertId;
 
         //! INSERT HERB-SYMPTOM RELATIONS
-        const relations = uniqueHerbIds.map(herbId => [
-            herbId,
-            symptomId
-        ]);
+        if (uniqueHerbIds.length > 0) {
+            const relations = uniqueHerbIds.map(herbId => [
+                herbId,
+                symptomId
+            ]);
 
-        await connection.query(
-            "INSERT INTO herb_symptoms (herb_id, symptom_id) values ?",
-            [relations]
-        );
+            await connection.query(
+                "INSERT INTO herb_symptoms (herb_id, symptom_id) VALUES ?",
+                [relations]
+            );
+        }
 
         await connection.commit();
 
@@ -251,10 +260,17 @@ const createSymptom = async (req, res) => {
 
 
 //! UPDATE SYMPTOM
-
 const updateSymptom = async (req, res) => {
-    const { id } = req.params;
+    const symptomId = Number(req.params.id);
     const { name, herbIds } = req.body;
+
+    //! ID VALIDATION
+    if (!Number.isInteger(symptomId) || symptomId <= 0) {
+        return res.status(400).json({
+            success: false,
+            message: "Invalid symptom ID."
+        });
+    }
 
     //! VALIDATION
     if (!name || typeof name !== "string" || !name.trim()) {
@@ -264,10 +280,10 @@ const updateSymptom = async (req, res) => {
         });
     }
 
-    if (!Array.isArray(herbIds) || herbIds.length === 0) {
+    if (!Array.isArray(herbIds)) {
         return res.status(400).json({
             success: false,
-            message: "At least one herb must be assigned."
+            message: "Herb IDs must be provided as an array."
         });
     }
 
@@ -294,7 +310,7 @@ const updateSymptom = async (req, res) => {
         //! CHECK IF SYMPTOM EXISTS
         const [existingSymptoms] = await connection.query(
             "SELECT id FROM symptoms WHERE id = ?",
-            [id]
+            [symptomId]
         );
 
         if (existingSymptoms.length === 0) {
@@ -309,7 +325,7 @@ const updateSymptom = async (req, res) => {
         //! CHECK FOR DUPLICATE NAME
         const [duplicateSymptoms] = await connection.query(
             "SELECT id FROM symptoms WHERE name = ? AND id != ?",
-            [name.trim(), id]
+            [name.trim(), symptomId]
         );
 
         if (duplicateSymptoms.length > 0) {
@@ -322,46 +338,54 @@ const updateSymptom = async (req, res) => {
         }
 
         //! CHECK IF ALL HERBS EXIST
-        const placeholders = uniqueHerbIds.map(() => "?").join(", ");
+        if (uniqueHerbIds.length > 0) {
+            const placeholders = uniqueHerbIds.map(() => "?").join(", ");
 
-        const [existingHerbs] = await connection.query(
-            `SELECT id FROM herbs WHERE id IN (${placeholders})`,
-            uniqueHerbIds
-        );
+            const [existingHerbs] = await connection.query(
+                `SELECT id FROM herbs WHERE id IN (${placeholders})`,
+                uniqueHerbIds
+            );
 
-        if (existingHerbs.length !== uniqueHerbIds.length) {
-            await connection.rollback();
+            if (existingHerbs.length !== uniqueHerbIds.length) {
+                await connection.rollback();
 
-            return res.status(400).json({
-                success: false,
-                message: "One or more herbs do not exist."
-            });
+                return res.status(400).json({
+                    success: false,
+                    message: "One or more herbs do not exist."
+                });
+            }
         }
 
         //! UPDATE SYMPTOM NAME
         await connection.query(
-            `UPDATE symptoms
-             SET name = ?, updated_at = CURRENT_TIMESTAMP
-             WHERE id = ?`,
-            [name.trim(), id]
+            `
+            UPDATE symptoms
+            SET
+                name = ?,
+                updated_at = CURRENT_TIMESTAMP
+            WHERE id = ?
+            `,
+            [name.trim(), symptomId]
         );
 
         //! DELETE OLD RELATIONS
         await connection.query(
             "DELETE FROM herb_symptoms WHERE symptom_id = ?",
-            [id]
+            [symptomId]
         );
 
         //! INSERT NEW RELATIONS
-        const relations = uniqueHerbIds.map(herbId => [
-            herbId,
-            Number(id)
-        ]);
+        if (uniqueHerbIds.length > 0) {
+            const relations = uniqueHerbIds.map(herbId => [
+                herbId,
+                symptomId
+            ]);
 
-        await connection.query(
-            "INSERT INTO herb_symptoms (herb_id, symptom_id) VALUES ?",
-            [relations]
-        );
+            await connection.query(
+                "INSERT INTO herb_symptoms (herb_id, symptom_id) VALUES ?",
+                [relations]
+            );
+        }
 
         await connection.commit();
 
@@ -369,7 +393,7 @@ const updateSymptom = async (req, res) => {
             success: true,
             message: "Symptom updated successfully.",
             data: {
-                id: Number(id),
+                id: symptomId,
                 name: name.trim(),
                 herbIds: uniqueHerbIds
             }
@@ -397,13 +421,21 @@ const updateSymptom = async (req, res) => {
 
 //! DELETE SYMPTOM
 const deleteSymptom = async (req, res) => {
-    const { id } = req.params;
+    const symptomId = Number(req.params.id);
+
+    //! ID VALIDATION
+    if (!Number.isInteger(symptomId) || symptomId <= 0) {
+        return res.status(400).json({
+            success: false,
+            message: "Invalid symptom ID."
+        });
+    }
 
     try {
         //! CHECK IF SYMPTOM EXISTS
         const [existingSymptoms] = await pool.query(
             "SELECT id FROM symptoms WHERE id = ?",
-            [id]
+            [symptomId]
         );
 
         if (existingSymptoms.length === 0) {
@@ -416,7 +448,7 @@ const deleteSymptom = async (req, res) => {
         //! DELETE SYMPTOM
         await pool.query(
             "DELETE FROM symptoms WHERE id = ?",
-            [id]
+            [symptomId]
         );
 
         res.status(200).json({
@@ -436,7 +468,6 @@ const deleteSymptom = async (req, res) => {
 
 
 //! EXPORTS
-
 module.exports = {
     getAllSymptoms,
     getSymptomById,

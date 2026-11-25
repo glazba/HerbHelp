@@ -1,4 +1,3 @@
-const { Connection } = require("mysql2");
 const { pool } = require("../config/database");
 
 //! GET ALL HERBS
@@ -9,7 +8,7 @@ const getAllHerbs = async (req, res) => {
                 herbs.id,
                 herbs.name,
                 herbs.description,
-                herbs.usage_text AS "usage",
+                herbs.usage_text AS \`usage\`,
                 herbs.warnings,
                 herbs.image_url AS image,
                 symptoms.id AS symptom_id,
@@ -20,7 +19,7 @@ const getAllHerbs = async (req, res) => {
             LEFT JOIN symptoms
                 ON herb_symptoms.symptom_id = symptoms.id
             ORDER BY herbs.id ASC
-            `);
+        `);
 
         const formattedHerbs = [];
 
@@ -55,7 +54,7 @@ const getAllHerbs = async (req, res) => {
         });
 
     } catch (error) {
-        console.error("Error fetching herbs", error);
+        console.error("Error fetching herbs:", error);
 
         res.status(500).json({
             success: false,
@@ -64,11 +63,13 @@ const getAllHerbs = async (req, res) => {
     }
 };
 
+
 //! GET HERB BY ID
 const getHerbById = async (req, res) => {
     try {
         const herbId = Number(req.params.id);
 
+        //! ID VALIDATION
         if (!Number.isInteger(herbId) || herbId <= 0) {
             return res.status(400).json({
                 success: false,
@@ -78,21 +79,21 @@ const getHerbById = async (req, res) => {
 
         const [rows] = await pool.query(
             `
-                SELECT
-                    herbs.id,
-                    herbs.name,
-                    herbs.description,
-                    herbs.usage_text AS \`usage\`,
-                    herbs.warnings,
-                    herbs.image_url AS image,
-                    symptoms.id AS symptom_id,
-                    symptoms.name AS symptom_name
-                FROM herbs
-                LEFT JOIN herb_symptoms
-                    ON herbs.id = herb_symptoms.herb_id
-                LEFT JOIN symptoms
-                    ON herb_symptoms.symptom_id = symptoms.id
-                WHERE herbs.id = ?
+            SELECT
+                herbs.id,
+                herbs.name,
+                herbs.description,
+                herbs.usage_text AS \`usage\`,
+                herbs.warnings,
+                herbs.image_url AS image,
+                symptoms.id AS symptom_id,
+                symptoms.name AS symptom_name
+            FROM herbs
+            LEFT JOIN herb_symptoms
+                ON herbs.id = herb_symptoms.herb_id
+            LEFT JOIN symptoms
+                ON herb_symptoms.symptom_id = symptoms.id
+            WHERE herbs.id = ?
             `,
             [herbId]
         );
@@ -148,11 +149,11 @@ const createHerb = async (req, res) => {
 
         //! VALIDATION
         if (
-            !name?.trim() ||
-            !description?.trim() ||
-            !usage?.trim() ||
-            !warnings?.trim() ||
-            !image?.trim() ||
+            typeof name !== "string" || !name.trim() ||
+            typeof description !== "string" || !description.trim() ||
+            typeof usage !== "string" || !usage.trim() ||
+            typeof warnings !== "string" || !warnings.trim() ||
+            typeof image !== "string" || !image.trim() ||
             !Array.isArray(symptoms) ||
             symptoms.length === 0 ||
             symptoms.some(symptom =>
@@ -169,7 +170,7 @@ const createHerb = async (req, res) => {
         connection = await pool.getConnection();
         await connection.beginTransaction();
 
-        //!INSERT HERB
+        //! INSERT HERB
         const [herbResult] = await connection.query(
             `
             INSERT INTO herbs (
@@ -179,7 +180,7 @@ const createHerb = async (req, res) => {
                 warnings,
                 image_url
             )
-                VALUES(?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?)
             `,
             [
                 name.trim(),
@@ -280,11 +281,11 @@ const updateHerb = async (req, res) => {
 
         //! DATA VALIDATION
         if (
-            !name?.trim() ||
-            !description?.trim() ||
-            !usage?.trim() ||
-            !warnings?.trim() ||
-            !image?.trim() ||
+            typeof name !== "string" || !name.trim() ||
+            typeof description !== "string" || !description.trim() ||
+            typeof usage !== "string" || !usage.trim() ||
+            typeof warnings !== "string" || !warnings.trim() ||
+            typeof image !== "string" || !image.trim() ||
             !Array.isArray(symptoms) ||
             symptoms.length === 0 ||
             symptoms.some(symptom =>
@@ -320,14 +321,14 @@ const updateHerb = async (req, res) => {
         await connection.query(
             `
             UPDATE herbs
-                SET
-                    name = ?,
-                    description = ?,
-                    usage_text = ?,
-                    warnings = ?,
-                    image_url = ?,
-                    updated_at = CURRENT_TIMESTAMP
-                WHERE id = ?
+            SET
+                name = ?,
+                description = ?,
+                usage_text = ?,
+                warnings = ?,
+                image_url = ?,
+                updated_at = CURRENT_TIMESTAMP
+            WHERE id = ?
             `,
             [
                 name.trim(),
@@ -369,7 +370,7 @@ const updateHerb = async (req, res) => {
                     herb_id,
                     symptom_id
                 )
-                    VALUES (?, ?)
+                VALUES (?, ?)
                 `,
                 [herbId, symptomId]
             );
@@ -420,24 +421,19 @@ const deleteHerb = async (req, res) => {
             });
         }
 
-        //! CHECK HERB
-        const [existingHerbs] = await pool.query(
-            "SELECT id FROM herbs WHERE id = ?",
+        //! DELETE HERB
+        const [result] = await pool.query(
+            "DELETE FROM herbs WHERE id = ?",
             [herbId]
         );
 
-        if (existingHerbs.length === 0) {
+        //! CHECK IF HERB EXISTS
+        if (result.affectedRows === 0) {
             return res.status(404).json({
                 success: false,
                 message: "Herb not found."
             });
         }
-
-        //! DELETE HERB
-        await pool.query(
-            "DELETE FROM herbs WHERE id = ?",
-            [herbId]
-        );
 
         res.status(200).json({
             success: true,
