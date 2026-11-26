@@ -44,7 +44,7 @@ async function login(req, res) {
         if (!isPasswordValid) {
             return res.status(401).json({
                 success: false,
-                message: "Invald username or password."
+                message: "Invalid username or password."
             });
         }
 
@@ -82,7 +82,7 @@ async function login(req, res) {
 
         return res.status(500).json({
             success: false,
-            message: "An internal server error occured."
+            message: "An internal server error occurred."
         });
     }
 }

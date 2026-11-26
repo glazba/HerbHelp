@@ -16,7 +16,7 @@ const getAllArticles = async (req, res) => {
             `);
 
         res.status(200).json({
-            succes: true,
+            success: true,
             count: rows.length,
             data: rows
         });
@@ -88,7 +88,7 @@ const createArticle = async (req, res) => {
     ) {
         return res.status(400).json({
             success: false,
-            message: "Title, desctiption and content are required."
+            message: "Title, description and content are required."
         });
     }
 

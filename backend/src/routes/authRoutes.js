@@ -25,7 +25,7 @@ const loginLimiter = rateLimit({
 });
 
 //! ADMIN LOGIN ROUTE
-router.post("/login", login);
+router.post("/login", loginLimiter, login);
 
 //! GET CURRENT ADMIN
 router.get("/me", authMiddleware, getMe);

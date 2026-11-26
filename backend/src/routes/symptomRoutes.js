@@ -24,7 +24,7 @@ router.post("/", authMiddleware, createSymptom);
 router.put("/:id", authMiddleware, updateSymptom);
 
 //! DELETE SYMPTOMS
-router.delete("/:id", authMiddleware, deleteSymptom)
+router.delete("/:id", authMiddleware, deleteSymptom);
 
 //! EXPORTS
 module.exports = router;
