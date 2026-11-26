@@ -9,6 +9,8 @@ const {
     deleteArticle
 } = require("../controllers/articleController");
 
+const { authMiddleware } = require("../middleware/authMiddleware");
+
 //! GET ALL ARTICLES
 router.get("/", getAllArticles);
 
@@ -16,13 +18,13 @@ router.get("/", getAllArticles);
 router.get("/:id", getArticleById);
 
 //! CREATE ARTICLE
-router.post("/", createArticle);
+router.post("/", authMiddleware, createArticle);
 
 //! UPDATE ARTICLE
-router.put("/:id", updateArticle);
+router.put("/:id", authMiddleware, updateArticle);
 
 //! DELETE ARTICLE
-router.delete("/:id", deleteArticle);
+router.delete("/:id", authMiddleware, deleteArticle);
 
 //! EXPORTS
 module.exports = router;

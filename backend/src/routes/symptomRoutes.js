@@ -8,7 +8,8 @@ const {
     updateSymptom,
     deleteSymptom
 } = require("../controllers/symptomController");
-const { updateHerb } = require("../controllers/herbController");
+
+const { authMiddleware } = require("../middleware/authMiddleware");
 
 //! GET ALL SYMPTOMS
 router.get("/", getAllSymptoms);
@@ -17,13 +18,13 @@ router.get("/", getAllSymptoms);
 router.get("/:id", getSymptomById);
 
 //! CREATE SYMPTOM
-router.post("/", createSymptom);
+router.post("/", authMiddleware, createSymptom);
 
 //! UPDATE SYMPTOMS
-router.put("/:id", updateSymptom);
+router.put("/:id", authMiddleware, updateSymptom);
 
 //! DELETE SYMPTOMS
-router.delete("/:id", deleteSymptom)
+router.delete("/:id", authMiddleware, deleteSymptom)
 
 //! EXPORTS
 module.exports = router;

@@ -9,6 +9,8 @@ const {
     deleteHerb
 } = require("../controllers/herbController");
 
+const { authMiddleware } = require("../middleware/authMiddleware");
+
 //! GET ALL HERBS
 router.get("/", getAllHerbs);
 
@@ -16,13 +18,13 @@ router.get("/", getAllHerbs);
 router.get("/:id", getHerbById);
 
 //! CREATE HERB
-router.post("/", createHerb);
+router.post("/", authMiddleware, createHerb);
 
 //! UPDATE HERB
-router.put("/:id", updateHerb);
+router.put("/:id", authMiddleware, updateHerb);
 
 //! DELETE HERB
-router.delete("/:id", deleteHerb);
+router.delete("/:id", authMiddleware, deleteHerb);
 
 //! EXPORTS
 module.exports = router;

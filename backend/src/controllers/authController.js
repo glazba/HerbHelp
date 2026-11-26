@@ -87,6 +87,17 @@ async function login(req, res) {
     }
 }
 
+//! GET CURRENT ADMIN
+function getMe(req, res) {
+    return res.status(200).json({
+        success: true,
+        admin: {
+            id: req.admin.id,
+            username: req.admin.username
+        }
+    });
+}
+
 //! ADMIN LOGOUT
 function logout(req, res) {
     res.clearCookie("token", {
@@ -104,5 +115,6 @@ function logout(req, res) {
 //! EXPORTS
 module.exports = {
     login,
+    getMe,
     logout
 };
