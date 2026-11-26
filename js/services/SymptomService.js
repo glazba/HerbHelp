@@ -3,45 +3,34 @@
 class SymptomService {
 
     //! GETTERS
-    
-    getAllSymptoms() {
-        return [...new Set(
-            herbs.flatMap(
-                (herb) => herb.symptoms
-            )
-        )].sort();
+
+    async getAllSymptoms() {
+
+        const response = await api.get("/symptoms");
+
+        return response.data
+            .map((symptom) => symptom.name)
+            .sort((a, b) =>
+                a.localeCompare(b, "hu")
+            );
     }
 
-    getSymptomsData() {
-        const symptomsMap = {};
+    async getSymptomsData() {
 
-        herbs.forEach((herb) => {
+        const response = await api.get("/symptoms");
 
-            herb.symptoms.forEach((symptom) => {
-
-                if (!symptomsMap[symptom]) {
-                    symptomsMap[symptom] = {
-                        name: symptom,
-                        herbsToUse: []
-                    };
-                }
-
-                symptomsMap[symptom]
-                    .herbsToUse
-                    .push({
-                        id: herb.id,
-                        name: herb.name
-                    });
-            });
-        });
-
-        return Object.values(symptomsMap)
+        return response.data
+            .map((symptom) => ({
+                name: symptom.name,
+                herbsToUse: symptom.herbs
+            }))
             .sort((a, b) =>
                 a.name.localeCompare(b.name, "hu")
             );
     }
 
     getPopularSymptoms() {
+
         return [
             "stressz",
             "köhögés",

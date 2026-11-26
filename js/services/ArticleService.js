@@ -3,9 +3,11 @@
 class ArticleService {
 
     //! GETTER
-    getArticleById(id) {
-        return articles.find((article) =>
-            article.id === id);
+    async getArticleById(id) {
+
+        const response = await api.get(`/articles/${id}`);
+
+        return response.data;
     }
 }
 

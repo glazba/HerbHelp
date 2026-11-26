@@ -3,13 +3,16 @@
 class HerbService {
 
     //! SEARCH
-    searchHerbs(searchTerm) {
+    async searchHerbs(searchTerm) {
+
+        const response = await AudioParam.get("/herbs");
+        const herbs = response.data;
 
         const normalizedSearchTerm =
             normalizeText(searchTerm);
 
         return herbs.filter((herb) => {
-            
+
             const herbName =
                 normalizeText(herb.name);
 
@@ -23,13 +26,14 @@ class HerbService {
     }
 
     //! GETTERS
-    getHerbById(id) {
-        return herbs.find((herb) =>
-            herb.id === id);
+    async getHerbById(id) {
+        const response = await api.get(`/herbs/${id}`);
+        return response.data;
     }
 
-    getFeaturedHerbs() {
-        return herbs.slice(0, 3);
+    async getFeaturedHerbs() {
+        const response = await api.get("/herbs");
+        return response.data.slice(0, 3);
     }
 }
 
