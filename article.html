@@ -10,6 +10,7 @@
 
     <script src="js/api.js" defer></script>
     <script src="js/services/ArticleService.js" defer></script>
+    <script src="js/ui.js" defer></script>
     <script src="js/article.js" defer></script>
     <script src="js/navigation.js" defer></script>
 </head>
@@ -41,6 +42,9 @@
     </header>
 
     <main class="page-container">
+
+        <div id="error-message" class="error-message" role="alert" hidden></div>
+
         <article class="detail-card article-container">
             <h1 id="article-title"></h1>
             <p id="article-description"></p>

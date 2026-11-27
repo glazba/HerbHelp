@@ -1,13 +1,24 @@
+
 //* Herbs page logic and herb list rendering
 
+
 //! DOM
+
 const herbsContainer =
     document.querySelector("#herbs-container");
 
+const errorMessage =
+    document.querySelector("#error-message");
+
+
 //! ERROR
-if (!herbsContainer) {
+
+if (
+    !herbsContainer ||
+    !errorMessage
+) {
     throw new Error(
-        "#herbs-container not found."
+        "Required herbs page elements not found."
     );
 }
 
@@ -16,7 +27,8 @@ if (!herbsContainer) {
 
 async function renderHerbs() {
 
-    const herbs = await herbService.getAllHerbs();
+    const herbs =
+        await herbService.getAllHerbs();
 
     let html = "";
 
@@ -31,9 +43,24 @@ async function renderHerbs() {
 //! INIT
 
 async function init() {
-    await renderHerbs();
+
+    try {
+
+        await renderHerbs();
+
+    } catch (error) {
+
+        console.error(
+            "Failed to initialize herbs page:",
+            error
+        );
+
+        showError(
+            errorMessage,
+            "Nem sikerült betölteni a gyógynövényeket. Kérjük próbáld újra később.",
+            herbsContainer
+        );
+    }
 }
 
-init().catch((error) => {
-    console.error("Failed to initialize herbs page:", error);
-});
+init();

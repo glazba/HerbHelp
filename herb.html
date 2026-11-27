@@ -10,6 +10,7 @@
 
     <script src="js/api.js" defer></script>
     <script src="js/services/HerbService.js" defer></script>
+    <script src="js/ui.js" defer></script>
     <script src="js/herb.js" defer></script>
     <script src="js/navigation.js" defer></script>
 </head>
@@ -41,6 +42,8 @@
     </header>
 
     <main class="page-container">
+        <div id="error-message" class="error-message" role="alert" hidden></div>
+
         <article class="detail-card">
             <h1 id="herb-name"></h1>
             <img id="herb-image" src="" alt="">

@@ -402,6 +402,22 @@ nav ul li a:hover {
   color: var(--text-color);
 }
 
+/*! ERROR MESSAGE */
+
+.error-message {
+  padding: 20px;
+  margin-bottom: 20px;
+
+  background-color: #fff0ed;
+  color: #a33a2b;
+
+  border: 1px solid #e5b8ae;
+  border-radius: 8px;
+
+  text-align: center;
+  font-weight: 500;
+}
+
 /*! TABLET */
 
 @media (max-width: 768px) {

@@ -26,13 +26,21 @@ const articleDescription =
 const articleContent =
     document.querySelector("#article-content");
 
+const errorMessage =
+    document.querySelector("#error-message");
+
+const articleContainer =
+    document.querySelector(".article-container");
+
 
 //! ERROR
 
 if (
     !articleTitle ||
     !articleDescription ||
-    !articleContent
+    !articleContent ||
+    !errorMessage ||
+    !articleContainer
 ) {
     throw new Error(
         "Required article elements not found."
@@ -66,20 +74,35 @@ function renderArticle(article) {
 
 async function init() {
 
-    const article =
-        await articleService.getArticleById(articleId);
+    try {
 
-    if (!article) {
-        document.body.innerHTML = `
-            <h1>Cikk nem található.</h1>
-        `;
+        const article =
+            await articleService.getArticleById(articleId);
 
-        throw new Error("Article not found");
+        renderArticle(article);
+
+    } catch (error) {
+
+        console.error(
+            "Failed to initialize article page:",
+            error
+        );
+
+        if (error.status === 404) {
+
+            showError(
+                "A keresett cikk nem található."
+            );
+
+        } else {
+
+            showError(
+                errorMessage,
+                "Nem sikerült betölteni a cikket. Kérjük, próbáld újra később.",
+                document.querySelector(".detail-card")
+            );
+        }
     }
-
-    renderArticle(article);
 }
 
-init().catch((error) => {
-    console.error("Failed to initialize article page:", error);
-});
+init();

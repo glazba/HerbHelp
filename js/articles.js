@@ -1,3 +1,4 @@
+
 //* Articles page logic and article list rendering
 
 
@@ -6,11 +7,18 @@
 const articlesContainer =
     document.querySelector("#articles-container");
 
+const errorMessage =
+    document.querySelector("#error-message");
+
+
 //! ERROR
 
-if (!articlesContainer) {
+if (
+    !articlesContainer ||
+    !errorMessage
+) {
     throw new Error(
-        "#articles-container not found."
+        "Required articles page elements not found."
     );
 }
 
@@ -18,26 +26,41 @@ if (!articlesContainer) {
 //! RENDER
 
 async function renderArticles() {
-    const articles = await articleService.getAllArticles();
+
+    const articles =
+        await articleService.getAllArticles();
 
     let html = "";
 
     articles.forEach((article) => {
-        html +=
-            createArticleCard(article);
+        html += createArticleCard(article);
     });
 
-    articlesContainer.innerHTML =
-        html;
+    articlesContainer.innerHTML = html;
 }
 
 
 //! INIT
 
 async function init() {
-    await renderArticles();
+
+    try {
+
+        await renderArticles();
+
+    } catch (error) {
+
+        console.error(
+            "Failed to initialize articles page:",
+            error
+        );
+
+        showError(
+            errorMessage,
+            "Nem sikerült betölteni a cikkeket. Kérjük, próbáld újra később.",
+            articlesContainer
+        );
+    }
 }
 
-init().catch((error) => {
-    console.error("Failed to initialize articles page:", error);
-});
+init();

@@ -69,3 +69,17 @@ function createArticleCard(article) {
         </article>
     `;
 }
+
+
+//! ERROR HANDLING
+
+function showError(errorElement, message, contentElement = null) {
+
+    errorElement.textContent = message;
+
+    errorElement.hidden = false;
+
+    if (contentElement) {
+        contentElement.hidden = true;
+    }
+}

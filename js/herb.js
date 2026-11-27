@@ -9,9 +9,6 @@ const params =
 const herbId =
     Number(params.get("id"));
 
-const herb =
-    herbService.getHerbById(herbId);
-
 
 //! DOM
 
@@ -33,6 +30,9 @@ const herbWarnings =
 const herbImage =
     document.querySelector("#herb-image");
 
+const errorMessage =
+    document.querySelector("#error-message");
+
 
 //! ERROR
 
@@ -45,6 +45,16 @@ if (
     !herbImage
 ) {
     throw new Error("Required herb elements not found.");
+}
+
+
+//! ERROR HANDLING
+
+function showError(message) {
+    errorMessage.textContent = message;
+    errorMessage.hidden = false;
+
+    document.querySelector(".detail-card").hidden = true;
 }
 
 
@@ -87,12 +97,21 @@ function renderSymptoms(herb) {
 
 async function init() {
 
-    const herb = await herbService.getHerbById(herbId);
+    try {
+        const herb = await herbService.getHerbById(herbId);
 
-    renderHerb(herb);
-    renderSymptoms(herb);
+        renderHerb(herb);
+        renderSymptoms(herb);
+
+    } catch (error) {
+        console.error("Failed to initialize herb page:", error);
+
+        if (error.status === 404) {
+            showError("A keresett gyógynövény nem található.");
+        } else {
+            showError("Nem sikerült betölteni a gyógynövény adatait. Kérjük, próbáléd újra később.");
+        }
+    }
 }
 
-init().catch((error) => {
-    console.error("Failed to initialize herb page:", error);
-});
+init();
