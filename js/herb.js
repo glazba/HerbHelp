@@ -12,15 +12,6 @@ const herbId =
 const herb =
     herbService.getHerbById(herbId);
 
-//! ERROR
-if (!herb) {
-    document.body.innerHTML = `
-        <h1>Növény nem található.</h1>
-    `;
-
-    throw new Error("Herb not found");
-}
-
 
 //! DOM
 
@@ -43,9 +34,23 @@ const herbImage =
     document.querySelector("#herb-image");
 
 
+//! ERROR
+
+if (
+    !herbName ||
+    !herbDescription ||
+    !herbUsage ||
+    !herbSymptoms ||
+    !herbWarnings ||
+    !herbImage
+) {
+    throw new Error("Required herb elements not found.");
+}
+
+
 //! RENDER
 
-function renderHerb() {
+function renderHerb(herb) {
     herbName.textContent =
         herb.name;
 
@@ -65,7 +70,7 @@ function renderHerb() {
         herb.name;
 }
 
-function renderSymptoms() {
+function renderSymptoms(herb) {
     let html = "";
 
     herb.symptoms.forEach((symptom) => {
@@ -80,10 +85,14 @@ function renderSymptoms() {
 
 //! INIT
 
-function init() {
-    renderHerb();
+async function init() {
 
-    renderSymptoms();
+    const herb = await herbService.getHerbById(herbId);
+
+    renderHerb(herb);
+    renderSymptoms(herb);
 }
 
-init();
+init().catch((error) => {
+    console.error("Failed to initialize herb page:", error);
+});

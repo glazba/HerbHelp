@@ -32,6 +32,12 @@ async function apiRequest(endpoint, options = {}) {
 const api = {
     get(endpoint) {
         return apiRequest(endpoint, {
+            method: "GET",
+        });
+    },
+
+    post(endpoint, body) {
+        return apiRequest(endpoint, {
             method: "POST",
             body: JSON.stringify(body)
         });

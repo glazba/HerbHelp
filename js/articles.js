@@ -17,7 +17,9 @@ if (!articlesContainer) {
 
 //! RENDER
 
-function renderArticles() {
+async function renderArticles() {
+    const articles = await articleService.getAllArticles();
+
     let html = "";
 
     articles.forEach((article) => {
@@ -32,8 +34,10 @@ function renderArticles() {
 
 //! INIT
 
-function init() {
-    renderArticles();
+async function init() {
+    await renderArticles();
 }
 
-init();
+init().catch((error) => {
+    console.error("Failed to initialize articles page:", error);
+});

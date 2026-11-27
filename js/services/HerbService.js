@@ -26,6 +26,11 @@ class HerbService {
     }
 
     //! GETTERS
+    async getAllHerbs() {
+        const response = await api.get("/herbs");
+        return response.data;
+    }
+
     async getHerbById(id) {
         const response = await api.get(`/herbs/${id}`);
         return response.data;

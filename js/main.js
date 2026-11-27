@@ -31,9 +31,10 @@ function renderResults(results) {
 }
 
 
-function renderFeaturedHerbs() {
+async function renderFeaturedHerbs() {
+
     const featuredHerbs =
-        herbService.getFeaturedHerbs();
+        await herbService.getFeaturedHerbs();
 
     let html = "";
 
@@ -64,9 +65,10 @@ function renderPopularSymptoms() {
 
 //! SEARCH
 
-function handleSearch(searchTerm) {
+async function handleSearch(searchTerm) {
+
     const results =
-        herbService.searchHerbs(
+        await herbService.searchHerbs(
             searchTerm
         );
 
@@ -85,6 +87,7 @@ function handleSearch(searchTerm) {
 }
 
 function setupPopularSymptomsEvents() {
+
     const symptomButtons =
         document.querySelectorAll(".symptom-btn");
 
@@ -106,6 +109,7 @@ function setupPopularSymptomsEvents() {
 //! EVENTS
 
 function setupSearchEvents() {
+
     searchForm.addEventListener("submit", (event) => {
         event.preventDefault();
 
@@ -125,11 +129,14 @@ function setupSearchEvents() {
 
 //! INIT
 
-function init() {
-    renderFeaturedHerbs();
+async function init() {
+
+    await renderFeaturedHerbs();
     renderPopularSymptoms();
     setupPopularSymptomsEvents();
     setupSearchEvents();
 }
 
-init();
+init().catch((error) => {
+    console.error("Failed to initialize main page:", error);
+});

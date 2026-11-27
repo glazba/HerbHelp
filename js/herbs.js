@@ -14,7 +14,10 @@ if (!herbsContainer) {
 
 //! RENDER
 
-function renderHerbs() {
+async function renderHerbs() {
+
+    const herbs = await herbService.getAllHerbs();
+
     let html = "";
 
     herbs.forEach((herb) => {
@@ -27,8 +30,10 @@ function renderHerbs() {
 
 //! INIT
 
-function init() {
-    renderHerbs();
+async function init() {
+    await renderHerbs();
 }
 
-init();
+init().catch((error) => {
+    console.error("Failed to initialize herbs page:", error);
+});

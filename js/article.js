@@ -1,3 +1,4 @@
+
 //* Single article page logic and article details rendering
 
 
@@ -13,20 +14,6 @@ const articleId =
         params.get("id")
     );
 
-const article =
-    articleService.getArticleById(articleId);
-
-//! ERROR
-
-if (!article) {
-    document.body.innerHTML = `
-            <h1>Cikk nem található.</h1>
-        `;
-    throw new Error(
-        "Article not found"
-    );
-}
-
 
 //! DOM
 
@@ -40,9 +27,23 @@ const articleContent =
     document.querySelector("#article-content");
 
 
+//! ERROR
+
+if (
+    !articleTitle ||
+    !articleDescription ||
+    !articleContent
+) {
+    throw new Error(
+        "Required article elements not found."
+    );
+}
+
+
 //! RENDER
 
-function renderArticle() {
+function renderArticle(article) {
+
     articleTitle.textContent =
         article.title;
 
@@ -63,8 +64,22 @@ function renderArticle() {
 
 //! INIT
 
-function init() {
-    renderArticle();
+async function init() {
+
+    const article =
+        await articleService.getArticleById(articleId);
+
+    if (!article) {
+        document.body.innerHTML = `
+            <h1>Cikk nem található.</h1>
+        `;
+
+        throw new Error("Article not found");
+    }
+
+    renderArticle(article);
 }
 
-init();
+init().catch((error) => {
+    console.error("Failed to initialize article page:", error);
+});

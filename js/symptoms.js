@@ -6,6 +6,7 @@
 const symptomsContainer =
     document.querySelector("#symptoms-container");
 
+
 //! ERROR
 
 if (!symptomsContainer) {
@@ -15,9 +16,9 @@ if (!symptomsContainer) {
 
 //! RENDER
 
-function renderSymptoms() {
+async function renderSymptoms() {
     const symptoms =
-        symptomService.getSymptomsData();
+        await symptomService.getSymptomsData();
 
     let html = "";
 
@@ -33,8 +34,10 @@ function renderSymptoms() {
 
 //! INIT
 
-function init() {
-    renderSymptoms();
+async function init() {
+    await renderSymptoms();
 }
 
-init();
+init().catch((error) => {
+    console.error("Failed to initialize symptoms page:", error);
+});
